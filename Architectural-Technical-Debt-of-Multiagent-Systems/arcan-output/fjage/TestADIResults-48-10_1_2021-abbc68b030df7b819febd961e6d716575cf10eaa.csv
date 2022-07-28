@@ -1,0 +1,4 @@
+counter,AS,Type,GranularityValue,SeverityScore,PageRank,NumBadDep,TotalDep,NumberOfVerteces,NumOfCycle,NumSetOfElement,TotNumOfSetOfElement,ADI
+1,234466,ud,2,1,11.27900654676333,2,0,0,0,3,3,3.0
+2,234429,cd,2,2,9.952433932877664,0,0,2,1,2,3,3.0
+3,234436,cd,2,1,12.605579160648995,0,0,2,1,2,3,3.0
