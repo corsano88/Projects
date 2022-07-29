@@ -30,7 +30,7 @@ data <- data %>% arrange(arcan.version)
 
 data <- subset(data, select=c("counter","AS","Type","GranularityValue","ADI","project","version","arcan.version"))
 
-data.adi <- data %>% subset(select=c("ADI","arcan.version")) %>% group_by(arcan.version) %>% summarise(AS=first(AS)) %>% mutate(commit=as.numeric(rownames(.)))
+data.adi <- data %>% subset(select=c("ADI","arcan.version")) %>% group_by(arcan.version) %>% summarise(ADI=first(ADI)) %>% mutate(commit=as.numeric(rownames(.)))
 
 # Plot
 ggplot(data.adi, aes(x=commit,y=ADI)) + geom_line() + 
