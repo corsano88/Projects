@@ -6,3 +6,6 @@ This folder contains the two parts (Arcan and Sonarqube analysis) of the project
   - **./plot-results** contains the plot result for ADI metric for all the systems, using the relative script "plots.r".
   - **./scripts containts** the 3 R scripts used for obtain the datasets, plots and analysis result.
   - **./table-results** containt 2 tables about Aracn metrics by analysis resulst (ADI, AS, HL, CD, UD) for all multiagent systems, also for the mann-kendall analysis metric reults (P-value signifact for variable and Trend).
+
+- **./Sonarqube-analysis** containts the API responses of all metrics about the systems considered, the overview of the sonarqube dashboard and the table results for the Technical debt metric
+  - **./sonarqube-responses** contains the responses obatined by postman in json format for all the multiagent system, for Fjage, Matsim-libs, Jabm and Madkit there are two version (fist and last) responses, for Sof and Housing-model there is only one version avaiable of GitHub for now. 
