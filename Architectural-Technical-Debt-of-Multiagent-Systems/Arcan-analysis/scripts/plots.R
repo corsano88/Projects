@@ -24,7 +24,7 @@ project = 'fjage'
 # project = 'matsim-libs'
 # project = 'sof'
 
-data <- read.csv(paste("C:/Users/corsa/Desktop/githubRepo/Projects/Architectural-Technical-Debt-of-Multiagent-Systems/Arcan-analysis/dataset/",project,".csv",sep=''))
+data <- read.csv(paste("dataset/",project,".csv",sep=''))
 
 data <- data %>% arrange(arcan.version)
 
