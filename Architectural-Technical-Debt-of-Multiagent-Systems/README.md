@@ -1,4 +1,4 @@
-This folder contains the two parts (Arcan and Sonarqube analysis) of the project "Architectural Technical Debt of Multiagen Systems", the systems considered are:
+This folder contains the two parts (Arcan and Sonarqube analysis) for the project "Architectural Technical Debt of Multiagen Systems", the systems considered are:
 - **Fjage :** Framework for Java and Groovy Agents. (url -> https://github.com/org-arl/fjage)
 - **Housing-model :** Agent-based model of the UK housing market.(url -> https://github.com/INET-Complexity/housing-model)
 - **Jabm :** Java Agent Based Modelling toolkit. (url -> https://github.com/phelps-sg/jabm)
