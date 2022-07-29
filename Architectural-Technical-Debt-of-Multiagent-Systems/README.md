@@ -6,6 +6,8 @@ This folder contains the two parts (Arcan and Sonarqube analysis) for the projec
 -  **Matsim-libs :** Multi-Agent Transport Simulation. (url -> https://github.com/matsim-org/matsim-libs)
 -  **Sof :** Simulation Optimization and exploration Framework on the cloud. (url -> https://github.com/isislab-unisa/sof)  
 
+The sub folders contains are:
+
 - **./Arcan-analysis** containts the datasets ,outputs, scripts code and final results of all projects used in the analysys
   - **./arcan-output** contains the Arcan outputs for all 6 multiagent system considered.
   - **./dataset** contains the final dataset obtained by combining all the outputs per multiagent system, using the relative script "create_project_dataframe.r".
