@@ -1,0 +1,116 @@
+rules_version = '2';
+
+// Regole di accesso per Cantiere360. Rispecchiano src/domain/permessi.ts:
+// l'interfaccia nasconde ciò che un ruolo non può fare, queste regole lo impediscono davvero.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /tenants/{tenant} {
+
+      function profilo() {
+        return get(/databases/$(database)/documents/tenants/$(tenant)/utenti/$(request.auth.uid)).data;
+      }
+      function membro() {
+        return request.auth != null
+          && exists(/databases/$(database)/documents/tenants/$(tenant)/utenti/$(request.auth.uid))
+          && profilo().attivo == true;
+      }
+      function ruoli(elenco) {
+        return membro() && profilo().ruolo in elenco;
+      }
+      // Chi crea un documento deve firmarlo con il proprio id.
+      function firmatoDaMe() {
+        return request.resource.data.createdBy == request.auth.uid;
+      }
+
+      // Utenti: ci si registra da soli come operaio non attivo; l'admin assegna ruolo e attiva.
+      match /utenti/{uid} {
+        allow read: if membro() || request.auth.uid == uid;
+        allow create: if request.auth != null
+          && request.auth.uid == uid
+          && request.resource.data.id == uid
+          && request.resource.data.ruolo == 'operaio'
+          && request.resource.data.attivo == false;
+        allow update: if ruoli(['admin']) && uid != request.auth.uid;
+        allow delete: if false;
+      }
+
+      // Anagrafiche
+      match /clienti/{id} {
+        allow read: if membro();
+        allow create: if ruoli(['admin', 'ufficio']) && firmatoDaMe();
+        allow update, delete: if ruoli(['admin', 'ufficio']);
+      }
+      match /risorse/{id} {
+        allow read: if membro();
+        allow create: if ruoli(['admin', 'ufficio']) && firmatoDaMe();
+        allow update, delete: if ruoli(['admin', 'ufficio']);
+      }
+      match /campiCustom/{id} {
+        allow read: if membro();
+        allow create: if ruoli(['admin', 'ufficio']) && firmatoDaMe();
+        allow update, delete: if ruoli(['admin', 'ufficio']);
+      }
+
+      // CRM: solo amministrazione e ufficio
+      match /trattative/{id} {
+        allow read: if ruoli(['admin', 'ufficio']);
+        allow create: if ruoli(['admin', 'ufficio']) && firmatoDaMe();
+        allow update: if ruoli(['admin', 'ufficio']);
+        allow delete: if ruoli(['admin']);
+      }
+
+      // Progetti, cantieri, pianificazione
+      match /progetti/{id} {
+        allow read: if membro();
+        allow create: if ruoli(['admin', 'ufficio']) && firmatoDaMe();
+        allow update: if ruoli(['admin', 'ufficio']);
+        allow delete: if ruoli(['admin']);
+      }
+      match /cantieri/{id} {
+        allow read: if membro();
+        allow create: if ruoli(['admin', 'ufficio']) && firmatoDaMe();
+        allow update: if ruoli(['admin', 'ufficio']);
+        allow delete: if ruoli(['admin']);
+      }
+      match /allocazioni/{id} {
+        allow read: if membro();
+        allow create: if ruoli(['admin', 'ufficio']) && firmatoDaMe();
+        allow update, delete: if ruoli(['admin', 'ufficio']);
+      }
+
+      // Gestione cantiere
+      match /giornale/{id} {
+        allow read: if ruoli(['admin', 'ufficio', 'capocantiere']);
+        allow create: if ruoli(['admin', 'ufficio', 'capocantiere']) && firmatoDaMe();
+        allow update: if ruoli(['admin', 'ufficio', 'capocantiere']);
+        allow delete: if ruoli(['admin']);
+      }
+      match /fir/{id} {
+        allow read: if ruoli(['admin', 'ufficio', 'capocantiere']);
+        allow create: if ruoli(['admin', 'ufficio', 'capocantiere']) && firmatoDaMe();
+        allow update: if ruoli(['admin', 'ufficio', 'capocantiere']);
+        allow delete: if ruoli(['admin']);
+      }
+
+      // DDT: tutti li compilano; un DDT firmato non si modifica più.
+      match /ddt/{id} {
+        allow read: if membro();
+        allow create: if membro() && firmatoDaMe();
+        allow update: if membro() && resource.data.stato == 'bozza';
+        allow delete: if ruoli(['admin']) && resource.data.stato == 'bozza';
+      }
+
+      // Contatori per la numerazione progressiva di DDT e progetti
+      match /contatori/{id} {
+        allow read, write: if membro();
+      }
+
+      // Registro modifiche: si aggiunge soltanto, non si modifica né si cancella.
+      match /audit/{id} {
+        allow read: if ruoli(['admin', 'ufficio']);
+        allow create: if membro() && firmatoDaMe();
+        allow update, delete: if false;
+      }
+    }
+  }
+}

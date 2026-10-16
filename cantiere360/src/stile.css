@@ -1,0 +1,695 @@
+:root {
+  --blu: #1f3a5f;
+  --blu-chiaro: #e8eef6;
+  --accento: #e07a1f;
+  --testo: #1d232b;
+  --tenue: #66707c;
+  --bordo: #d9dee5;
+  --sfondo: #f5f7fa;
+  --bianco: #fff;
+  --ok: #1e7d4f;
+  --ok-sf: #e3f4ea;
+  --att: #9a5b00;
+  --att-sf: #fff2dc;
+  --male: #b3261e;
+  --male-sf: #fde7e5;
+  --info: #1d5fa8;
+  --info-sf: #e3eefb;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--testo);
+  background: var(--sfondo);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--sfondo);
+}
+h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+h2 {
+  font-size: 1.15rem;
+  margin: 1.4rem 0 0.6rem;
+}
+h3 {
+  font-size: 1rem;
+  margin: 0.8rem 0 0.4rem;
+}
+a {
+  color: var(--info);
+}
+
+button,
+.pulsante {
+  font: inherit;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--bordo);
+  border-radius: 6px;
+  background: var(--bianco);
+  color: var(--testo);
+  cursor: pointer;
+  display: inline-block;
+}
+button:hover:not(:disabled) {
+  border-color: var(--blu);
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+button.primario {
+  background: var(--blu);
+  border-color: var(--blu);
+  color: #fff;
+}
+button.pericolo {
+  color: var(--male);
+}
+button.link {
+  border: 0;
+  background: none;
+  color: var(--info);
+  padding: 0;
+  text-decoration: underline;
+}
+button.grande {
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 1.1rem;
+}
+input,
+select,
+textarea {
+  font: inherit;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid var(--bordo);
+  border-radius: 6px;
+  background: var(--bianco);
+  width: 100%;
+  min-width: 0;
+}
+input[type="checkbox"] {
+  width: auto;
+}
+fieldset {
+  border: 1px solid var(--bordo);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  margin: 0;
+  min-width: 0;
+}
+legend {
+  font-weight: 600;
+  padding: 0 0.3rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bianco);
+  border: 1px solid var(--bordo);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+th,
+td {
+  text-align: left;
+  padding: 0.5rem 0.7rem;
+  border-bottom: 1px solid var(--bordo);
+  vertical-align: top;
+}
+th {
+  background: var(--blu-chiaro);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+tr.cliccabile {
+  cursor: pointer;
+}
+tr.cliccabile:hover {
+  background: var(--sfondo);
+}
+tr.spenta {
+  color: var(--tenue);
+}
+
+.nota {
+  color: var(--tenue);
+  font-size: 0.88rem;
+}
+.vuoto {
+  color: var(--tenue);
+  padding: 1rem 0;
+}
+.errore,
+.errori {
+  color: var(--male);
+}
+.errori {
+  background: var(--male-sf);
+  border-radius: 6px;
+  padding: 0.5rem 0.5rem 0.5rem 1.6rem;
+  margin: 0;
+  grid-column: 1 / -1;
+}
+.avviso {
+  background: var(--att-sf);
+  color: var(--att);
+  border-radius: 6px;
+  padding: 0.5rem 0.7rem;
+}
+.conferma {
+  background: var(--ok-sf);
+  color: var(--ok);
+  border-radius: 6px;
+  padding: 0.6rem;
+}
+.caricamento {
+  padding: 3rem;
+  text-align: center;
+  color: var(--tenue);
+}
+
+.etichetta {
+  display: inline-block;
+  font-size: 0.78rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  margin: 0 0.2rem 0.15rem 0;
+  background: var(--sfondo);
+  color: var(--tenue);
+  border: 1px solid var(--bordo);
+  white-space: nowrap;
+}
+.etichetta.ok {
+  background: var(--ok-sf);
+  color: var(--ok);
+  border-color: transparent;
+}
+.etichetta.attenzione {
+  background: var(--att-sf);
+  color: var(--att);
+  border-color: transparent;
+}
+.etichetta.male {
+  background: var(--male-sf);
+  color: var(--male);
+  border-color: transparent;
+}
+.etichetta.info {
+  background: var(--info-sf);
+  color: var(--info);
+  border-color: transparent;
+}
+
+/* ---------- Accesso ---------- */
+.accesso {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: var(--blu);
+}
+.scheda {
+  background: var(--bianco);
+  border-radius: 10px;
+  padding: 1.6rem;
+  width: min(380px, 100%);
+  display: grid;
+  gap: 0.8rem;
+}
+.scheda label {
+  display: grid;
+  gap: 0.25rem;
+}
+.pulsanti-verticali {
+  display: grid;
+  gap: 0.5rem;
+}
+
+/* ---------- Layout gestionale ---------- */
+.gestionale {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  min-height: 100vh;
+}
+aside {
+  background: var(--blu);
+  color: #dfe7f1;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+.marchio {
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 1rem;
+  color: #fff;
+}
+aside nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0.5rem;
+  flex: 1;
+}
+aside nav a {
+  color: inherit;
+  text-decoration: none;
+  padding: 0.45rem 0.6rem;
+  border-radius: 6px;
+}
+aside nav a:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+aside nav a.active {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  box-shadow: inset 3px 0 var(--accento);
+}
+aside h4 {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 1rem 0.6rem 0.3rem;
+  color: #9fb1c8;
+}
+aside .utente {
+  padding: 1rem;
+  display: grid;
+  gap: 0.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+aside .utente .nota {
+  color: #9fb1c8;
+}
+aside .utente .link {
+  color: #fff;
+  justify-self: start;
+}
+.contenuto {
+  min-width: 0;
+  padding: 1.2rem 1.6rem 3rem;
+}
+.apri-menu {
+  display: none;
+}
+
+.pagina .testata {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+.azioni {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.cerca {
+  max-width: 320px;
+  margin-bottom: 0.8rem;
+}
+.schede-filtro {
+  display: flex;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+.schede-filtro button.attivo {
+  background: var(--blu);
+  color: #fff;
+  border-color: var(--blu);
+}
+.riquadro {
+  background: var(--bianco);
+  border: 1px solid var(--bordo);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+}
+.riquadro table {
+  border: 0;
+}
+.indicatori {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.indicatori > * {
+  background: var(--bianco);
+  border: 1px solid var(--bordo);
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  display: grid;
+  gap: 0.2rem;
+  color: inherit;
+  text-decoration: none;
+}
+.indicatori span:first-child {
+  color: var(--tenue);
+  font-size: 0.85rem;
+}
+.indicatori strong {
+  font-size: 1.35rem;
+}
+.elenco {
+  padding-left: 1.2rem;
+}
+.pulsanti {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin: 0.5rem 0;
+}
+
+/* ---------- Kanban trattative ---------- */
+.kanban {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(210px, 1fr);
+  gap: 0.7rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+.colonna {
+  background: var(--blu-chiaro);
+  border-radius: 8px;
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-height: 160px;
+}
+.colonna h3 {
+  margin: 0;
+}
+.colonna > .nota {
+  margin: 0;
+}
+.carta {
+  text-align: left;
+  display: grid;
+  gap: 0.15rem;
+  background: var(--bianco);
+  width: 100%;
+}
+
+/* ---------- Modali e moduli ---------- */
+.sfondo-modale {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 25, 40, 0.45);
+  display: grid;
+  place-items: start center;
+  padding: 4vh 1rem;
+  overflow-y: auto;
+  z-index: 10;
+}
+.modale {
+  background: var(--bianco);
+  border-radius: 10px;
+  width: min(560px, 100%);
+  padding: 1rem 1.2rem 1.2rem;
+}
+.modale.largo {
+  width: min(820px, 100%);
+}
+.modale > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+.modale h2 {
+  margin: 0;
+}
+.chiudi {
+  border: 0;
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0 0.3rem;
+}
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem 0.9rem;
+  align-items: start;
+}
+.griglia > .largo,
+.griglia > h3,
+.griglia > fieldset,
+.griglia > .piede {
+  grid-column: 1 / -1;
+}
+fieldset.griglia {
+  border: 0;
+  padding: 0;
+}
+.campo {
+  display: grid;
+  gap: 0.25rem;
+}
+.campo > span {
+  font-size: 0.85rem;
+  color: var(--tenue);
+}
+.spunta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.2rem 0;
+}
+.piede {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+.riga-campi {
+  display: flex;
+  gap: 0.5rem;
+  align-items: end;
+  margin-bottom: 0.4rem;
+  flex-wrap: wrap;
+}
+.riga-campi > * {
+  flex: 1 1 140px;
+}
+.riga-campi > button {
+  flex: 0 0 auto;
+}
+.stato-trattativa {
+  background: var(--sfondo);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+}
+
+/* ---------- Giornale ---------- */
+.voce header {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+.avanzamento {
+  flex: 0 0 120px;
+  height: 8px;
+  background: var(--blu-chiaro);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-left: auto;
+}
+.avanzamento span {
+  display: block;
+  height: 100%;
+  background: var(--ok);
+}
+
+/* ---------- DDT, firma, foto ---------- */
+.righe-ddt {
+  display: grid;
+  gap: 0.4rem;
+}
+.riga-ddt {
+  display: grid;
+  grid-template-columns: 1fr 80px 90px auto;
+  gap: 0.4rem;
+}
+.firma canvas {
+  width: 100%;
+  height: 180px;
+  border: 1px dashed var(--tenue);
+  border-radius: 8px;
+  background: #fff;
+  touch-action: none;
+  display: block;
+  margin: 0.5rem 0;
+}
+.miniature {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+.miniature figure {
+  margin: 0;
+  position: relative;
+}
+.miniature img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.miniature button {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  padding: 0 0.4rem;
+}
+
+/* ---------- Webapp mobile ---------- */
+.mobile {
+  max-width: 560px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--sfondo);
+}
+.mobile > header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--blu);
+  color: #fff;
+  padding: 0.7rem 1rem;
+}
+.mobile > header .nota {
+  color: #c9d5e4;
+}
+.mobile > header a {
+  color: #fff;
+}
+.mobile main {
+  padding: 1rem;
+}
+.mobile .griglia {
+  grid-template-columns: 1fr;
+}
+.lista-mobile {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+.lista-mobile li {
+  background: var(--bianco);
+  border: 1px solid var(--bordo);
+  border-radius: 8px;
+  padding: 0.7rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ---------- Stampa DDT ---------- */
+.stampa {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background: #fff;
+  min-height: 100vh;
+}
+.stampa .azioni {
+  margin-bottom: 1rem;
+}
+.firma-stampa img {
+  max-width: 280px;
+  border-bottom: 1px solid #999;
+}
+.foto-stampa {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+.foto-stampa img {
+  width: 100%;
+  border-radius: 4px;
+}
+@media print {
+  .non-stampare {
+    display: none !important;
+  }
+  .stampa {
+    padding: 0;
+  }
+  .foto-stampa img {
+    break-inside: avoid;
+  }
+}
+
+/* ---------- Schermi piccoli ---------- */
+@media (max-width: 800px) {
+  .gestionale {
+    grid-template-columns: 1fr;
+  }
+  aside {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 250px;
+    transform: translateX(-100%);
+    transition: transform 0.2s;
+    z-index: 20;
+  }
+  .menu-aperto aside {
+    transform: none;
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.4);
+  }
+  .apri-menu {
+    display: inline-block;
+    margin-bottom: 0.6rem;
+  }
+  .contenuto {
+    padding: 0.8rem 1rem 2rem;
+  }
+  .griglia {
+    grid-template-columns: 1fr;
+  }
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* Sul telefono la descrizione della riga DDT occupa tutta la larghezza */
+@media (max-width: 600px) {
+  .riga-ddt {
+    grid-template-columns: 1fr 1fr auto;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--bordo);
+  }
+  .riga-ddt > input:first-child {
+    grid-column: 1 / -1;
+  }
+}
