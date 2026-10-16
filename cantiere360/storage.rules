@@ -1,0 +1,18 @@
+rules_version = '2';
+
+// Firme e foto dei DDT. Solo utenti attivi, solo immagini, massimo 10 MB.
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /tenants/{tenant}/ddt/{ddtId}/{file} {
+      function membro() {
+        return request.auth != null
+          && firestore.get(/databases/(default)/documents/tenants/$(tenant)/utenti/$(request.auth.uid)).data.attivo == true;
+      }
+      allow read: if membro();
+      allow create: if membro()
+        && request.resource.size < 10 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+      allow update, delete: if false;
+    }
+  }
+}
